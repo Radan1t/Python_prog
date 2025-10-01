@@ -10,7 +10,6 @@ LANG_MAP = {
 }
 
 def TransLate(text, lang):
-    """Переклад тексту на мову lang (назва або код)."""
     lang_code = lang.lower()
     if lang_code in LANG_MAP:
         lang_code = LANG_MAP[lang_code]
@@ -21,22 +20,20 @@ def TransLate(text, lang):
         return f"Помилка перекладу: {e}"
 
 def LangDetect(text):
-    """Визначає мову тексту (ISO-код + confidence)."""
     try:
-        langs = detect_langs(text)  # повертає список мов з ймовірністю
+        langs = detect_langs(text)  
         best = langs[0]
         return best.lang, best.prob
     except Exception:
         return None, 0
 
 def CodeLang(lang):
-    """Перетворює код мови в назву або навпаки."""
     lang_lower = lang.lower()
     if lang_lower in LANG_MAP:
-        return LANG_MAP[lang_lower]  # назва -> код
+        return LANG_MAP[lang_lower] 
     for name, code in LANG_MAP.items():
         if code == lang_lower:
-            return name  # код -> назва
+            return name  
     return None
 
 if __name__ == "__main__":
